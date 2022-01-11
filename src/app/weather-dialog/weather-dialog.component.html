@@ -1,0 +1,20 @@
+<h1 mat-dialog-title><mat-icon>cloud</mat-icon> Weather in <span style="color:rgb(199, 101, 199)">{{data.title}},{{data.parent.title}}</span></h1>
+<div mat-dialog-content>
+  <div>
+    <div style="margin:20px;display:flex;justify-content:space-evenly;align-items:center;flex-wrap: wrap;" *ngFor="let cw of data.consolidated_weather">
+        <h4 style="color:white;">{{ getDate(cw.applicable_date)}}</h4>
+        <div style="display:flex;justify-content:space-evenly;align-items:center;">
+            <img [src]="getIcon(cw.weather_state_abbr)" [alt]="cw.weather_state_abbr" style="width:50px;height:50px;"/>
+            <div style="margin:20px;display:flex;justify-content:space-evenly;align-items:center;flex-direction: column;">
+                <p>Max &#x2103; {{cw.max_temp.toFixed(2)}}</p>
+                <p>Current &#x2103; {{cw.the_temp.toFixed(2)}}</p>
+                <p>Min &#x2103; {{cw.min_temp.toFixed(2)}}</p>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Dismiss</button>
+  <button mat-button [mat-dialog-close]="data.title" cdkFocusInitial>Ok</button>
+</div>

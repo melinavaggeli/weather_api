@@ -1,0 +1,17 @@
+<form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Search Location</mat-label>
+      <input type="text"
+             placeholder="Search Location"
+             aria-label="Search Location"
+             matInput
+             [formControl]="autocompleteValue"
+             [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of options" [value]="option.id">
+          {{option.title}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  
