@@ -16,12 +16,15 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { NavbarComponent } from './navbar/navbar.component';
 import {MatGridListModule} from '@angular/material/grid-list';
-
+import { CityCardComponent } from './city-card/city-card.component';
+import { WeatherDialogComponent } from './weather-dialog/weather-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    CityCardComponent,
+    WeatherDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,12 @@
+<mat-card class="example-card" style="width:100%;padding:20px;">
+    <mat-card-title>{{location.title}}</mat-card-title>
+    <mat-card-subtitle>
+      {{location.type}}
+    </mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-flat-button color="primary" (click)="getWeatherOfLocation()"><mat-icon>cloud</mat-icon> Weather</button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+    </mat-card-footer>
+</mat-card>

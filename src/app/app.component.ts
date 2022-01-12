@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, map, of, startWith, switchMap } from 'rxjs';
 import { WeatherService } from './weather.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
+import {WeatherDialogComponent} from './weather-dialog/weather-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -53,6 +53,31 @@ export class AppComponent implements OnInit,OnDestroy{
 
   ngOnDestroy(): void {
       this.subscription.unsubscribe()
+  }
+  openDialog(location:any): void {
+    const dialogRef = this.dialog.open(WeatherDialogComponent, {
+      width: '750px',
+      data: location,
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.location = {};
+    });
+  }
+
+  getWeatherOfLocation(id:string | number){
+    this.loading = true
+    this.ws.getLocation(id).subscribe(
+      val => {
+        this.location = val;
+        this.openDialog(this.location)
+        this.loading = false
+      },
+      error => {
+        this.location = {}
+        this.loading = false
+      }
+    )
   }
 
   handleSize(event:any) {

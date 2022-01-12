@@ -1,6 +1,5 @@
- 
-<app-navbar></app-navbar>
-<div class="content" style="background-color: #123;height:100vh;">
+ <app-navbar></app-navbar>
+<div class="content" style="background-color: #123;">
   <form class="example-form" >
     <mat-form-field appearance="fill" class="fld" style="width:100%;">
       <input
@@ -20,18 +19,7 @@
   <p style='color:white' *ngIf="error">No Result Found.</p>
   <mat-grid-list [cols]="mybreakpoint" rowHeight="4:1" *ngIf="!loading" style="margin:20px;"> 
     <mat-grid-tile *ngFor="let location of locations" style="display:flex;justify-content: center;">
-      <mat-card class="example-card" style="width:100%;padding:20px;">
-        <mat-card-title>{{location.title}}</mat-card-title>
-        <mat-card-subtitle>
-          {{location.type}}
-        </mat-card-subtitle>
-        <mat-card-actions>
-          <button mat-flat-button color="primary" ><mat-icon>cloud</mat-icon> Weather</button>
-        </mat-card-actions>
-        <mat-card-footer>
-          <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
-        </mat-card-footer>
-      </mat-card>
+      <app-city-card [loading]="loading" [location]="location" style="width:100%" (weatherEmitter)="getWeatherOfLocation($event)"></app-city-card>
     </mat-grid-tile>
   </mat-grid-list>
 
