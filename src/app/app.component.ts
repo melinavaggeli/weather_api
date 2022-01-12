@@ -3,7 +3,6 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, map, of, startWith, switchMap } from 'rxjs';
 import { WeatherService } from './weather.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {WeatherDialogComponent} from './weather-dialog/weather-dialog.component';
 
 
 @Component({
@@ -19,10 +18,12 @@ export class AppComponent implements OnInit,OnDestroy{
   locations: any[] = []
   location:any
   error = false
+  mybreakpoint:any
 
   constructor(private ws:WeatherService,public dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.mybreakpoint = (window.innerWidth <= 950) ? 1 : 3;
     this.subscription = this.autocompleteValue.valueChanges.pipe(
       startWith(''),
       debounceTime(800),
@@ -31,18 +32,6 @@ export class AppComponent implements OnInit,OnDestroy{
         return val?.trim() ?  this.onAutocomplete(val) : of([])}),
       map(val => val.data)
      ).subscribe(err => this.locations = [])
-  }
-
-  openDialog(location:any): void {
-    const dialogRef = this.dialog.open(WeatherDialogComponent, {
-      width: '750px',
-      data: location,
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-     
-      this.location = {};
-    });
   }
  
   onAutocomplete(val:any) {
@@ -62,23 +51,12 @@ export class AppComponent implements OnInit,OnDestroy{
     return this.locations
   }
 
-  onClick(id:string | number){
-    this.loading = true
-    this.ws.getLocation(id).subscribe(
-      val => {
-        this.location = val;
-        this.openDialog(this.location)
-        this.loading = false
-      },
-      error => {
-        this.location = {}
-        this.loading = false
-      }
-    )
-  }
   ngOnDestroy(): void {
       this.subscription.unsubscribe()
   }
 
+  handleSize(event:any) {
+    this.mybreakpoint = (event.target.innerWidth <= 600) ? 1 : 3;
+    }
 
 }

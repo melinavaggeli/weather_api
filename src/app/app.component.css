@@ -1,0 +1,13 @@
+@media screen and (max-width: 992px) {
+    .example-card {
+      padding:25px;
+      margin-top: 25px;
+      margin-bottom: 20px;
+    }
+  }
+
+  @media screen and (max-width: 992px) {
+    .content {
+      height: 200vh !important ; 
+    }
+  }

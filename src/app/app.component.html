@@ -14,19 +14,19 @@
       <mat-icon matPrefix class="my-icon" style="color:white;">search</mat-icon>
     </mat-form-field>
   </form>
-  <div style="margin:2px;">
+  <div>
     <mat-progress-bar mode="buffer" color="primary" *ngIf="loading"></mat-progress-bar>
   </div>
-  <p style='color:white' *ngIf="error">No Results</p>
-  <mat-grid-list cols="3" rowHeight="4:1" *ngIf="!loading" style="margin:20px;"> 
+  <p style='color:white' *ngIf="error">No Result Found.</p>
+  <mat-grid-list [cols]="mybreakpoint" rowHeight="4:1" *ngIf="!loading" style="margin:20px;"> 
     <mat-grid-tile *ngFor="let location of locations" style="display:flex;justify-content: center;">
-      <mat-card class="example-card" style="width:100%;padding:20px">
+      <mat-card class="example-card" style="width:100%;padding:20px;">
         <mat-card-title>{{location.title}}</mat-card-title>
         <mat-card-subtitle>
           {{location.type}}
         </mat-card-subtitle>
         <mat-card-actions>
-          <button mat-flat-button color="primary" (click)="onClick(location.woeid)"><mat-icon>cloud</mat-icon> Weather</button>
+          <button mat-flat-button color="primary" ><mat-icon>cloud</mat-icon> Weather</button>
         </mat-card-actions>
         <mat-card-footer>
           <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
